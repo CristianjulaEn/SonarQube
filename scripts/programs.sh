@@ -14,3 +14,6 @@ sudo apt-get install oracle-java8-installer
 
 #set environment variables
 sudo apt-get install oracle-java8-set-default
+
+#install postgres
+sudo apt-get install -y postgresql
