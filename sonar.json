@@ -1,0 +1,10 @@
+{
+	"variables" : 
+	{
+		"ATLAS_NAME"            : "SonarQube",
+		"ATLAS_TOKEN"           : "{{env `ATLAS_TOKEN`}}",
+		"ATLAS_USERNAME"        : "{{env `ATLAS_USERNAME`}}",
+		"AWS_ACCESS_KEY_ID"     : "{{env `AWS_ACCESS_KEY_ID`}}",
+		"AWS_SECRET_ACCESS_KEY" : "{{env `AWS_SECRET_ACCESS_KEY`}}",
+	}
+}
