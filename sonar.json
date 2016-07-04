@@ -5,10 +5,11 @@
 		"ATLAS_TOKEN"           : "{{env `ATLAS_TOKEN`}}",
 		"ATLAS_USERNAME"        : "{{env `ATLAS_USERNAME`}}",
 		"AWS_ACCESS_KEY_ID"     : "{{env `AWS_ACCESS_KEY_ID`}}",
-		"AWS_SECRET_ACCESS_KEY" : "{{env `AWS_SECRET_ACCESS_KEY`}}",
+		"AWS_SECRET_ACCESS_KEY" : "{{env `AWS_SECRET_ACCESS_KEY`}}"
 	},                             
                                                
-	"builders"        :                                  
+	"builders"        :     
+	[                             
 	{                                       
 		"type"                  : "amazon-ebs",
 		"region"                : "us-east-1",
@@ -19,14 +20,19 @@
 		"ssh_timeout"           : "10m",
 		"ssh_username"          : "ubuntu",
 		"instance_type"         : "c3.large"
-	},                              
+	}
+
+	],                              
                                           
-	"provisioners"    :              
+	"provisioners"    :   
+	[           
 	{                            
 		"type"                  : "shell",
 		"execute_command"       : "echo 'packer' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
 		"scripts"               : ["scripts/programs.sh"]
-	},                        
+	}
+
+	],                        
                              
 	"post-processors" : 
 	[                  
