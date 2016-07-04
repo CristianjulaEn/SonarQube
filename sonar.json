@@ -1,5 +1,5 @@
 {
-	"variables" : 
+	"variables"       : 
 	{
 		"ATLAS_NAME"            : "SonarQube",
 		"ATLAS_TOKEN"           : "{{env `ATLAS_TOKEN`}}",
@@ -8,7 +8,7 @@
 		"AWS_SECRET_ACCESS_KEY" : "{{env `AWS_SECRET_ACCESS_KEY`}}",
 	},                             
                                                
-	"builders"   :                                  
+	"builders"        :                                  
 	{                                       
 		"type"                  : "amazon-ebs",
 		"region"                : "us-east-1",
@@ -21,12 +21,28 @@
 		"instance_type"         : "c3.large"
 	},                              
                                           
-	"provisioners" :              
+	"provisioners"    :              
 	{                            
 		"type"                  : "shell",
 		"execute_command"       : "echo 'packer' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
 		"scripts"               : ["scripts/programs.sh"]
-	}
-
-
+	},                        
+                             
+	"post-processors" : 
+	[                  
+                             
+	{
+		"type"                  : "atlas",
+		"artifact"              : "{{user `ATLAS_USERNAME`}}/{{user `ATLAS_NAME`}}",
+		"artifact_type"         : "amazon.ami",
+		"metadata"              : {"created_at": "{{timestamp}}"}
+	}                              
+                                        
+	],                                   
+                                       
+	"push"           :
+	{
+		"name"                  : "{{user `ATLAS_USERNAME`}}/{{user `ATLAS_NAME`}}",
+		"vcs"                   : false
+	}          
 }
