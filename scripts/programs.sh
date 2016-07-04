@@ -11,3 +11,6 @@ sudo apt-get update
 
 #install Oracle Java 8 with the PPA installer
 sudo apt-get install oracle-java8-installer
+
+#set environment variables
+sudo apt-get install oracle-java8-set-default
