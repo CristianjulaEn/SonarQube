@@ -44,3 +44,16 @@ resource "aws_subnet" "sonar_public_subnet" {
 		create_before_destroy = true
 	}
 }
+
+resource "aws_route_table" "public_route_table" {
+	vpc_id = "${aws_vpc.sonar_vpc.id}"
+
+	route {
+		cidr_block = "0.0.0.0/0"
+		gateway_id = "${aws_internet_gateway.sonar_gateway.id}"
+	}
+
+	lifecycle {
+		create_before_destroy = true
+	}
+}
