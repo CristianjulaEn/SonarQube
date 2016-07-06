@@ -35,4 +35,12 @@ resource "aws_subnet" "sonar_public_subnet" {
 	availability_zone      = "${element(split(",", var.azs), count.index)}"
 	count                  = "${length(split(",", var.cidrs))}"
 	map_public_ip_on_lunch = true
+
+	tags {
+		Name = "sonar_public_subnet"
+	}
+
+	lifecycle {
+		create_before_destroy = true
+	}
 }
