@@ -57,3 +57,17 @@ resource "aws_route_table" "public_route_table" {
 		create_before_destroy = true
 	}
 }
+
+resource "aws_route_table_assocation" "public_route_association" {
+	count     = "${length(split(",", var.public_cidrs))}"
+	subnet_id = "${element(aws_subnet.sonar_public_subnet.*.id, count.index)}"
+	route_table_id = "${aws_route_table.public_route_table.id}"
+
+	lifecycle {
+		create_before_destroy = true
+	}
+}
+
+output "public_subnet_ids" {
+	value = "${join(",", aws_subnet.public.*.id)}"
+}
