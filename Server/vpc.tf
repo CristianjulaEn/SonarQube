@@ -33,7 +33,7 @@ resource "aws_subnet" "sonar_public_subnet" {
 	vpc_id                 = "${aws_vpc.sonar_vpc.id}"
 	cidr_block             = "${element(split(",", var.public_cidrs), count.index)}"
 	availability_zone      = "${element(split(",", var.azs), count.index)}"
-	count                  = "${length(split(",", var.cidrs))}"
+	count                  = "${length(split(",", var.azs))}"
 	map_public_ip_on_lunch = true
 
 	tags {
@@ -58,8 +58,16 @@ resource "aws_route_table" "public_route_table" {
 	}
 }
 
+resource "aws_main_route_table_association" "public" {
+    vpc_id         = "${aws_vpc.sonar_vpc.id}"
+    route_table_id = "${aws_route_table.public_route_table.id}"
+
+    lifecycle {
+    	create_before_destroy = true
+    }
+}
+
 resource "aws_route_table_assocation" "public_route_association" {
-	count          = "${length(split(",", var.public_cidrs))}"
 	subnet_id      = "${element(aws_subnet.sonar_public_subnet.*.id, count.index)}"
 	route_table_id = "${aws_route_table.public_route_table.id}"
 
@@ -79,7 +87,7 @@ resource "aws_subnet" "sonar_private_subnet" {
 	vpc_id                  = "${aws_vpc.sonar_vpc.id}"
 	cidr_block              = "${element(split(",", var.private_cidrs), count.index)}"
 	availability_zone       = "${element(split(",", var.azs), count.index)}"
-	count                   = "${length(split(",", var.private_cidrs))}"
+	count                   = "${length(split(",", var.azs))}"
 	map_public_ip_on_launch = false
 
 	tags {
@@ -89,4 +97,37 @@ resource "aws_subnet" "sonar_private_subnet" {
 	lifecycle {
 		create_before_destroy = true
 	}
+}
+
+resource "aws_route_table" "private_route_table" {
+	vpc_id = "${aws_vpc.sonar_vpc.id}"
+	count  = "${length(split(",", var.azs))}"
+
+	route {
+		cidr_block     = "0.0.0.0/0"
+		nat_gateway_id = "${element(aws_nat_gateway.nat.*.id, count.index)}"
+	}
+
+	tags {
+		Name = "private_route_table"
+	}
+
+	lifecycle {
+		create_before_destroy = true
+	}
+}
+
+resource "aws_route_table_association" "private_route_table_association" {
+	subnet_id      = "${element(aws_subnet.sonar_private_subnet.*.id, count.index)}"
+	route_table_id = "${element(aws_route_table.private_route_table.*.id, count.index)}"
+	count          = "${length(split(",", var.azs))}"
+
+	lifecycle {
+		create_before_destroy = true
+	} 
+}
+
+resource "aws_eip" "sonar_eip" {
+	vpc = true
+
 }
