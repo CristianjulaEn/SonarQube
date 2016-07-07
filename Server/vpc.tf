@@ -76,5 +76,17 @@ output "public_subnet_ids" {
 # Private Subnet
 #--------------------------------------------------------------
 resource "aws_subnet" "sonar_private_subnet" {
-	vpc_id
+	vpc_id                  = "${aws_vpc.sonar_vpc.id}"
+	cidr_block              = "${element(split(",", var.private_cidrs), count.index)}"
+	availability_zone       = "${element(split(",", var.azs), count.index)}"
+	count                   = "${length(split(",", var.private_cidrs))}"
+	map_public_ip_on_launch = false
+
+	tags {
+		Name = "private_subnet"
+	}
+
+	lifecycle {
+		create_before_destroy = true
+	}
 }
