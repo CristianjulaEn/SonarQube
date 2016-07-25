@@ -19,7 +19,7 @@ variable "aws_secret_key" {
 variable "azs" {
 	type = "string"
 	description = "Availability Zones"
-	default = "us-east-1a,us-east-1c,us-east-1e"
+	default = "us-east-1a,us-east-1b,us-east-1e"
 }
 
 #--------------------------------------------------------------
