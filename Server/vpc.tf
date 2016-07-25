@@ -2,7 +2,7 @@
 # VPC
 #--------------------------------------------------------------
 resource "aws_vpc" "sonar_vpc" {
-	cidr_block           = "10.0.0.0/24"
+	cidr_block           = "172.31.0.0/16"
 	enable_dns_support   = true
 	enable_dns_hostnames = true
 
@@ -80,10 +80,6 @@ resource "aws_route_table_assocation" "public_route_association" {
 	}
 }
 
-output "public_subnet_ids" {
-	value = "${join(",", aws_subnet.public.*.id)}"
-}
-
 #--------------------------------------------------------------
 # Private Subnet
 #--------------------------------------------------------------
@@ -134,7 +130,7 @@ resource "aws_route_table_association" "private_route_table_association" {
 #--------------------------------------------------------------
 # NAT Eip
 #--------------------------------------------------------------
-resource "aws_eip" "sonar_eip" {
+resource "aws_eip" "sonar_nat_eip" {
 	vpc   = true
 	count = "${length(split(",", var.azs))}"
 
@@ -148,6 +144,6 @@ resource "aws_eip" "sonar_eip" {
 #--------------------------------------------------------------
 resource "aws_nat_gateway" "sonar_nat" {
 	count         = "${length(split(",", var.azs))}"
-	allocation_id = "${element(aws_eip.sonar_eip.*.id, count.index)}"
+	allocation_id = "${element(aws_eip.sonar_nat_eip.*.id, count.index)}"
 	subnet_id     = "${element(aws_subnet.sonar_public_subnet.*.id, count.index)}"
 }
