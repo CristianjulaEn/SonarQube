@@ -56,6 +56,10 @@ resource "aws_route_table" "public_route_table" {
 	lifecycle {
 		create_before_destroy = true
 	}
+
+	tags {
+		Name = "main"
+	}
 }
 
 resource "aws_main_route_table_association" "public" {
