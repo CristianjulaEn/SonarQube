@@ -34,7 +34,7 @@ resource "aws_subnet" "sonar_public_subnet" {
 	cidr_block             = "${element(split(",", var.public_cidrs), count.index)}"
 	availability_zone      = "${element(split(",", var.azs), count.index)}"
 	count                  = "${length(split(",", var.azs))}"
-	map_public_ip_on_lunch = true
+	map_public_ip_on_launch = true
 
 	tags {
 		Name = "sonar_public_subnet"
@@ -71,7 +71,7 @@ resource "aws_main_route_table_association" "public" {
     }
 }
 
-resource "aws_route_table_assocation" "public_route_association" {
+resource "aws_route_table_association" "public_route_association" {
 	subnet_id      = "${element(aws_subnet.sonar_public_subnet.*.id, count.index)}"
 	route_table_id = "${aws_route_table.public_route_table.id}"
 
@@ -105,7 +105,7 @@ resource "aws_route_table" "private_route_table" {
 
 	route {
 		cidr_block     = "0.0.0.0/0"
-		nat_gateway_id = "${element(aws_nat_gateway.nat.*.id, count.index)}"
+		nat_gateway_id = "${element(aws_nat_gateway.sonar_nat.*.id, count.index)}"
 	}
 
 	tags {
@@ -146,4 +146,8 @@ resource "aws_nat_gateway" "sonar_nat" {
 	count         = "${length(split(",", var.azs))}"
 	allocation_id = "${element(aws_eip.sonar_nat_eip.*.id, count.index)}"
 	subnet_id     = "${element(aws_subnet.sonar_public_subnet.*.id, count.index)}"
+
+	lifecycle {
+		create_before_destroy = true
+	}
 }
