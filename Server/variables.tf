@@ -14,12 +14,20 @@ variable "aws_secret_key" {
 }
 
 #--------------------------------------------------------------
+# Access and Secret Keys
+#--------------------------------------------------------------
+variable "region" {
+  description = "The AWS region to create resources in."
+  default = "eu-west-1"
+}
+
+#--------------------------------------------------------------
 # Availability Zones
 #--------------------------------------------------------------
 variable "azs" {
 	type = "string"
 	description = "Availability Zones"
-	default = "us-east-1a,us-east-1b,us-east-1e"
+	default = "eu-west-1a,eu-west-1b,eu-west-1e"
 }
 
 #--------------------------------------------------------------
