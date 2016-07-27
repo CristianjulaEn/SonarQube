@@ -11,5 +11,25 @@ resource "aws_security_group" "primary" {
 		to_port   = "0"
 		protocol  = "-1"
 		self      = true
+	}
+
+	egress {
+		from_port   = "0"
+		to_port     = "0"
+		protocol    = "-1"
+		self        = true
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+	tags {
+		Name = "sonar-default-vpc"
 	} 
+}
+
+#--------------------------------------------------------------
+# bastion Server Security Group
+#--------------------------------------------------------------
+resource "aws_security_group" "bastion" {
+	name        = "bastion-sonar"
+	description = 
 }
