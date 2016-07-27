@@ -18,7 +18,7 @@ variable "aws_secret_key" {
 #--------------------------------------------------------------
 variable "region" {
   description = "The AWS region to create resources in."
-  default = "eu-west-1"
+  default = "us-east-1"
 }
 
 #--------------------------------------------------------------
@@ -27,7 +27,7 @@ variable "region" {
 variable "azs" {
 	type = "string"
 	description = "Availability Zones"
-	default = "eu-west-1a,eu-west-1b,eu-west-1e"
+	default = "us-east-1a,us-east-1a,us-east-1a"
 }
 
 #--------------------------------------------------------------
