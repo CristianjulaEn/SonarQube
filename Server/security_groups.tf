@@ -31,5 +31,38 @@ resource "aws_security_group" "primary" {
 #--------------------------------------------------------------
 resource "aws_security_group" "bastion" {
 	name        = "bastion-sonar"
-	description = 
+	description = "Security group for bastion instances that allows SSH and VPN traffic from internet"
+	vpc_id      = "${aws_vpc.sonar_vpc.id}"
+
+	ingress {
+		from_port   = 22
+		to_port     = 22
+		protocol    = "tcp"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+	ingress {
+		from_port   = 1194
+		to_port     = 1194
+		protocol    = "udp"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+	egress {
+		from_port   = 80
+		to_port     = 80
+		protocol    = "tcp"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+
+    egress {
+    	from_port   = 443
+        to_port     = 443
+    	protocol    = "tcp"
+    	cidr_blocks = ["0.0.0.0/0"]
+  	}
+
+  	tags {
+  		Name = "bastion-sonar"
+  	}
 }
