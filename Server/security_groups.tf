@@ -66,3 +66,19 @@ resource "aws_security_group" "bastion" {
   		Name = "bastion-sonar"
   	}
 }
+
+#--------------------------------------------------------------
+# Web Traffic Security Group
+#--------------------------------------------------------------
+resource "aws_security_group" "web" {
+	name        = "web-sonar"
+	description = "Security group that allows web traffic from the internet"
+	vpc_id      = "${aws_vpc.sonar_vpc.id}"
+
+	ingress {
+		from_port   = 80
+		to_port     = 80
+		protocol    = "tcp"
+		cidr_blocks = ["0.0.0.0/0"]
+	}
+}
