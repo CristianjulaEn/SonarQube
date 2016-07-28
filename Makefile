@@ -5,7 +5,7 @@ terraform-dir=/d/FARAH/SonarQube/Server
 build-ami:
 	packer build sonar.json
 
-infrastructure-plan:
+plan:
 	cd $(terraform-dir) && terraform plan
 
 infrastructure-graph:
