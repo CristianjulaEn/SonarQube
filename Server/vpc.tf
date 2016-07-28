@@ -39,10 +39,10 @@ resource "aws_internet_gateway" "sonar_gateway" {
 # Public Subnet
 #--------------------------------------------------------------
 resource "aws_subnet" "sonar_public_subnet" {
-	vpc_id                 = "${aws_vpc.sonar_vpc.id}"
-	cidr_block             = "${element(split(",", var.public_cidrs), count.index)}"
-	availability_zone      = "${element(split(",", var.azs), count.index)}"
-	count                  = "${length(split(",", var.azs))}"
+	vpc_id                  = "${aws_vpc.sonar_vpc.id}"
+	cidr_block              = "${element(split(",", var.public_cidrs), count.index)}"
+	availability_zone       = "${element(split(",", var.azs), count.index)}"
+	count                   = "${length(compact(split(",", var.public_cidrs)))}"
 	map_public_ip_on_launch = true
 
 	tags {
@@ -96,7 +96,7 @@ resource "aws_subnet" "sonar_private_subnet" {
 	vpc_id                  = "${aws_vpc.sonar_vpc.id}"
 	cidr_block              = "${element(split(",", var.private_cidrs), count.index)}"
 	availability_zone       = "${element(split(",", var.azs), count.index)}"
-	count                   = "${length(split(",", var.azs))}"
+	count                   = "${length(compact(split(",", var.private_cidrs)))}"
 	map_public_ip_on_launch = false
 
 	tags {
