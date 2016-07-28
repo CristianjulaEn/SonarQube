@@ -28,7 +28,7 @@ variable "region" {
 variable "azs" {
 	type        = "string"
 	description = "Availability Zones"
-	default     = "us-east-1a,us-east-1a,us-east-1a"
+	default     = "us-east-1a,us-east-1b,us-east-1d"
 }
 
 #--------------------------------------------------------------
