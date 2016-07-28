@@ -8,12 +8,12 @@ build-ami:
 plan:
 	cd $(terraform-dir) && terraform plan
 
-infrastructure-graph:
+graph:
 	cd $(terraform-dir) && terraform graph | dot -Tpng > graph.png 
 
-infrastructure-build:
+build:
 	cd $(terraform-dir) && terraform build
 
-infrastructure-destroy:
+destroy:
 	cd $(terraform-dir) && terraform destroy
 
