@@ -2,6 +2,8 @@
 
 terraform-dir=/d/FARAH/SonarQube/Server
 
+all: plan apply
+
 build-ami:
 	packer build sonar.json
 
@@ -11,8 +13,8 @@ plan:
 graph:
 	cd $(terraform-dir) && terraform graph | dot -Tpng > graph.png 
 
-build:
-	cd $(terraform-dir) && terraform build
+apply:
+	cd $(terraform-dir) && terraform apply
 
 destroy:
 	cd $(terraform-dir) && terraform destroy
