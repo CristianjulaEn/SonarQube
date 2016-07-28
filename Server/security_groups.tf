@@ -22,8 +22,12 @@ resource "aws_security_group" "primary" {
 	}
 
 	tags {
-		Name = "sonar-default-vpc"
-	} 
+		Name = "sonar-primary-vpc"
+	}
+
+	lifecycle {
+		create_before_destroy = true
+	}
 }
 
 #--------------------------------------------------------------
@@ -65,6 +69,10 @@ resource "aws_security_group" "bastion" {
   	tags {
   		Name = "bastion-sonar"
   	}
+
+	lifecycle {
+		create_before_destroy = true
+	}
 }
 
 #--------------------------------------------------------------
@@ -91,5 +99,9 @@ resource "aws_security_group" "web" {
 
 	tags {
 		Name = "web-sonar"
+	}
+
+	lifecycle {
+		create_before_destroy = true
 	}
 }
