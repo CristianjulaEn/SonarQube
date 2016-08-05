@@ -17,3 +17,6 @@ sudo apt-get install oracle-java8-set-default
 
 #install postgres database
 sudo apt-get install -y postgresql
+
+# get sonarqube
+wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.1.2.zip
