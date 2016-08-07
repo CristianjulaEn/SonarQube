@@ -28,10 +28,10 @@
 	[           
 	{                            
 		"type"                  : "shell",
-		"execute_command"       : "echo 'packer' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
 		"scripts"               : ["scripts/programs.sh"]
 	}
-
+	
 	],                        
                              
 	"post-processors" : 
@@ -40,9 +40,9 @@
 	{
 		"type"                  : "atlas",
 		"artifact"              : "{{user `ATLAS_USERNAME`}}/{{user `ATLAS_NAME`}}",
-		"artifact_type"         : "amazon.ami",
+		"artifact_type"         : "amazon.image",
 		"metadata"              : {"created_at": "{{timestamp}}"}
-	}                              
+	}                           
                                         
 	],                                   
                                        
