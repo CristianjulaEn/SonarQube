@@ -14,6 +14,14 @@ variable "aws_secret_key" {
 }
 
 #--------------------------------------------------------------
+# Public & Private CIDRs
+#--------------------------------------------------------------
+variable "key_file" {
+	type        = "string"
+	description = "describe your variable"
+	default     = "ssh_keys/sonar.pub"
+}
+#--------------------------------------------------------------
 # Access and Secret Keys
 #--------------------------------------------------------------
 variable "region" {
