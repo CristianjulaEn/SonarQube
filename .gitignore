@@ -17,3 +17,5 @@ terraform.tfstate.backup
 .terraform
 .terraform.tfstate
 terraform.tfstate
+sonar.pub
+packerlog.txt
