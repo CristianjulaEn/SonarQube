@@ -1,4 +1,3 @@
-ssh_keys
 .terraform
 *.pem
 *.pub
