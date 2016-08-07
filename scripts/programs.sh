@@ -7,16 +7,30 @@ echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | su
 sudo apt-add-repository ppa:webupd8team/java
 
 #update system packages
-sudo apt-get update
+sudo apt-get -y update
+sudo apt-get -y install zip unzip wget
+
 
 #install Oracle Java 8 with the PPA installer
-sudo apt-get install oracle-java8-installer
+sudo apt-get -y install oracle-java8-installer
 
 #set environment variables
-sudo apt-get install oracle-java8-set-default
+sudo apt-get -y install oracle-java8-set-default
 
 #install postgres database
-sudo apt-get install -y postgresql
+sudo apt-get -y install postgresql
 
 # get sonarqube
-wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-5.1.2.zip
+echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" | sudo tee -a /etc/apt/sources.list.d/sonarqube.list > /dev/null
+sudo apt-get -y update
+sudo apt-get -y --force-yes install sonar
+
+
+# # start Sonar
+# /etc/sonarqube/bin/linux-x86-64/sonar.sh console
+
+# # scanner
+# mkdir -p /etc/sonar-scanner && cd /etc/sonar-scanner
+# wget https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.6.1.zip
+# unzip sonar-scanner-2.6.1.zip
+
