@@ -4,7 +4,13 @@ terraform-dir=/d/FARAH/SonarQube/Server
 
 all: plan apply
 
-build-ami:
+validate:
+	packer validate sonar.json
+
+infra-check:
+	cd $(terraform-dir) && terraform validate
+
+bake-ami:
 	packer build sonar.json
 
 plan:
