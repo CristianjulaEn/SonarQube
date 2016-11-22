@@ -28,6 +28,7 @@ resource "aws_instance" "BastionInstance" {
 	tags {
 		Name       = "BastionInstance"
 		role       = "bastion"
+		monitoring = "consul"
 	}
 
 	lifecycle {
