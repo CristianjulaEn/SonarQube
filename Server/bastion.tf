@@ -2,9 +2,9 @@
 # Bastion Artifact (AMI)
 #--------------------------------------------------------------
 data "atlas_artifact" "SonarBastion" {
-	name    = "Panda/SonarBastion"
-	build   = "latest"
-	type    = "amazon.image"
+	name       = "Panda/SonarBastion"
+	version    = "latest"
+	type       = "amazon.image"
 }
 
 #--------------------------------------------------------------
@@ -26,8 +26,8 @@ resource "aws_instance" "BastionInstance" {
 	}
 
 	tags {
-		Name = "BastionInstance"
-		role = "bastion"
+		Name       = "BastionInstance"
+		role       = "bastion"
 	}
 
 	lifecycle {

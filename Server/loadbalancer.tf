@@ -20,6 +20,13 @@ resource "aws_elb" "balancer" {
 		lb_protocol       = "tcp"
 	}
 
+	listener {
+		instance_port     = 9000
+		instance_protocol = "tcp"
+		lb_port           = 9000
+		lb_protocol       = "tcp"
+	}
+
 	health_check {
 		healthy_threshold   = 2
 		unhealthy_threshold = 2

@@ -143,9 +143,6 @@ resource "aws_eip" "sonar_nat_eip" {
 	vpc   = true
 	count = "${length(split(",", var.azs))}"
 
-	lifecycle {
-		create_before_destroy = true
-	}
 }
 
 #--------------------------------------------------------------
@@ -155,8 +152,4 @@ resource "aws_nat_gateway" "sonar_nat" {
 	count         = "${length(split(",", var.azs))}"
 	allocation_id = "${element(aws_eip.sonar_nat_eip.*.id, count.index)}"
 	subnet_id     = "${element(aws_subnet.sonar_public_subnet.*.id, count.index)}"
-
-	lifecycle {
-		create_before_destroy = true
-	}
 }

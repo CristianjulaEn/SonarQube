@@ -14,7 +14,7 @@ variable "aws_secret_key" {
 }
 
 #--------------------------------------------------------------
-# Public & Private CIDRs
+# Key File
 #--------------------------------------------------------------
 variable "key_file" {
 	type        = "string"
