@@ -18,3 +18,4 @@ terraform.tfstate.backup
 terraform.tfstate
 sonar.pub
 packerlog.txt
+aws.json
