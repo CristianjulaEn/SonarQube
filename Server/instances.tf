@@ -28,6 +28,7 @@ resource "aws_instance" "Sonar-Server" {
 	tags {
 		Name       = "Sonar-Server"
 		role       = "app-server"
+		monitoring = "consul"
 	}
 
 	connection {
@@ -48,7 +49,7 @@ resource "aws_instance" "Sonar-Server" {
 resource "aws_instance" "Consul-Server" {
 	ami             = "${data.atlas_artifact.ConsulServer.metadata_full.region-us-east-1}"
 	instance_type   = "c3.large"
-	subnet_id       = "${element(aws_subnet.sonar_public_subnet.*.id, count.index)}"
+	subnet_id       = "${element(aws_subnet.sonar_private_subnet.*.id, count.index)}"
 	security_groups = ["${aws_security_group.primary.id}", "${aws_security_group.consul_security_group.id}"]
 	key_name        = "${aws_key_pair.SonarKey.key_name}"
 	monitoring      = true
