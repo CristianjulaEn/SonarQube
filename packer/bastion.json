@@ -22,6 +22,53 @@
 		"instance_type"         : "t1.micro"
 	}
 
+	],
+
+	"provisioners"    :   
+	[           
+
+	{                            
+		"type"                  : "shell",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
+		"scripts"               : ["consul/common/install.consul.sh"]
+	},
+
+	{
+		"type"  				: "file",
+		"source"				: "consul/consul.d/clients/bastion.json",
+		"destination"			: "/tmp/bastion.json"
+	},
+
+	{
+		"type"  				: "file",
+		"source"				: "consul/consul.d/servers/aws.json",
+		"destination"			: "/tmp/aws.json"
+	},
+
+	{
+		"type"  				: "file",
+		"source"				: "consul/upstart/consul.conf",
+		"destination"			: "/tmp/consul.conf"
+	},
+
+	{
+		"type"                  : "shell",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
+		"inline"                : ["mv /tmp/bastion.json /etc/consul.d/bastion.json"]
+	},
+
+	{
+		"type"                  : "shell",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
+		"inline"                : ["mv /tmp/aws.json /etc/consul.d/aws.json"]
+	},
+
+	{
+		"type"                  : "shell",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
+		"inline"                : ["mv /tmp/consul.conf /etc/init/consul.conf"]
+	}
+	
 	],                       
                              
 	"post-processors" : 
