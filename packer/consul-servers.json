@@ -34,13 +34,13 @@
 
 	{
 		"type"  				: "file",
-		"source"				: "consul/consul.d/server.json",
+		"source"				: "consul/consul.d/servers/server.json",
 		"destination"			: "/tmp/server.json"
 	},
 
 	{
 		"type"  				: "file",
-		"source"				: "consul/consul.d/aws.json",
+		"source"				: "consul/consul.d/servers/aws.json",
 		"destination"			: "/tmp/aws.json"
 	},
 
