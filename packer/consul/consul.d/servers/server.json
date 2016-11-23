@@ -1,0 +1,20 @@
+{
+	"ui"			   		  : true,
+	"server"           		  : true,
+	"data_dir"                : "/var/log/consul",
+	"log_level"               : "info",
+	"bind_addr"				  : "0.0.0.0",
+	"client_addr"             : "0.0.0.0",
+	"enable_debug"            : true,
+	"enable_syslog"           : true,
+	"bootstrap_expect" 		  : 3,
+	"leave_on_terminate"      : true,
+	"rejoin_after_leave"      : true,
+	"skip_leave_on_interrupt" : true,
+
+
+	"service" : {
+		"name" : "consul",
+		"tags" : ["consul_server"]
+	}
+}
