@@ -20,7 +20,8 @@ resource "aws_instance" "Sonar-Server" {
 	ami             = "${data.atlas_artifact.SonarQube.metadata_full.region-us-east-1}"
 	instance_type   = "c3.large"
 	subnet_id       = "${element(aws_subnet.sonar_private_subnet.*.id, count.index)}"
-	security_groups = ["${aws_security_group.primary.id}"]
+	depends_on      = ["aws_instance.BastionInstance"]
+	security_groups = ["${aws_security_group.primary.id}","${aws_security_group.consul_security_group.id}"]
 	key_name        = "${aws_key_pair.SonarKey.key_name}"
 	monitoring      = true
 	count           = 2
