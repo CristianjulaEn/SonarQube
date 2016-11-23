@@ -14,8 +14,8 @@ resource "aws_instance" "BastionInstance" {
 	ami               = "${data.atlas_artifact.SonarBastion.metadata_full.region-us-east-1}"
 	instance_type     = "t1.micro"
 	subnet_id         = "${aws_subnet.sonar_public_subnet.1.id}"
-	security_groups   = ["${aws_security_group.primary.id}", "${aws_security_group.bastion.id}"]
-	depends_on        = ["aws_internet_gateway.sonar_gateway", "aws_key_pair.SonarKey"]
+	security_groups   = ["${aws_security_group.primary.id}", "${aws_security_group.bastion.id}","${aws_security_group.consul_security_group.id}"]
+	depends_on        = ["aws_internet_gateway.sonar_gateway", "aws_key_pair.SonarKey", "aws_instance.Consul-Server"]
 	key_name          = "${aws_key_pair.SonarKey.key_name}"
 	monitoring        = true
 	source_dest_check = false
