@@ -25,9 +25,9 @@ echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" | sudo
 sudo apt-get -y update
 sudo apt-get -y --force-yes install sonar
 
-
-# # start Sonar
-# /etc/sonarqube/bin/linux-x86-64/sonar.sh console
+#start Sonar
+sudo update-rc.d sonar start 20 3 4 5 
+sudo service sonar start
 
 # # scanner
 # mkdir -p /etc/sonar-scanner && cd /etc/sonar-scanner
