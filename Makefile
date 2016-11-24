@@ -1,17 +1,24 @@
 # Makefile
 
+packer-dir   =/d/FARAH/SonarQube/packer
 terraform-dir=/d/FARAH/SonarQube/Server
 
 all: plan apply
 
 validate:
-	packer validate sonar.json
+	cd $(packer-dir) && packer validate sonar.json
 
 infra-check:
 	cd $(terraform-dir) && terraform validate
 
-bake-ami:
+bake-sonar:
 	packer build sonar.json
+
+bake-consul:
+	packer build consul-servers.json
+
+bake-bastion:
+	packer build bastion.json
 
 plan:
 	cd $(terraform-dir) && terraform plan
