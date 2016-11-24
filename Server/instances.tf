@@ -35,8 +35,15 @@ resource "aws_instance" "Sonar-Server" {
 	connection {
 		user         = "ubuntu"
 		key_file     = "${var.key_file}"
+		password     = "${var.root_password}"
 		bastion_host = "${aws_eip.BastionEip.public_ip}"
 		agent        = false
+	}
+
+	provisioner "remote-exec" {
+		inline = [
+			"sudo service sonar start"
+		]
 	}
 	
 	lifecycle {
