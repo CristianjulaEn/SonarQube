@@ -18,9 +18,19 @@ variable "aws_secret_key" {
 #--------------------------------------------------------------
 variable "key_file" {
 	type        = "string"
-	description = "describe your variable"
+	description = "key file"
 	default     = "ssh_keys/sonar.pub"
 }
+
+#--------------------------------------------------------------
+# Password
+#--------------------------------------------------------------
+variable "root_password" {
+	type        = "string"
+	description = "ssh password"
+	default     = "ssh_keys/root_password"
+}
+
 #--------------------------------------------------------------
 # Access and Secret Keys
 #--------------------------------------------------------------
