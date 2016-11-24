@@ -8,17 +8,17 @@ sudo apt-add-repository ppa:webupd8team/java
 
 #update system packages
 sudo apt-get -y update
-sudo apt-get -y install zip unzip wget
+sudo apt-get -y --force-yes install zip unzip wget
 
 
 #install Oracle Java 8 with the PPA installer
-sudo apt-get -y install oracle-java8-installer
+sudo apt-get -y --force-yes install oracle-java8-installer
 
 #set environment variables
-sudo apt-get -y install oracle-java8-set-default
+sudo apt-get -y --force-yes install oracle-java8-set-default
 
 #install postgres database
-sudo apt-get -y install postgresql
+sudo apt-get -y --force-yes install postgresql
 
 # get sonarqube
 echo "deb http://downloads.sourceforge.net/project/sonar-pkg/deb binary/" | sudo tee -a /etc/apt/sources.list.d/sonarqube.list > /dev/null
@@ -26,7 +26,6 @@ sudo apt-get -y update
 sudo apt-get -y --force-yes install sonar
 
 #start Sonar
-sudo update-rc.d sonar start 20 3 4 5 
 sudo service sonar start
 
 # # scanner
