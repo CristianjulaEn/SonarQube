@@ -28,7 +28,7 @@ variable "key_file" {
 variable "root_password" {
 	type        = "string"
 	description = "ssh password"
-	default     = "ssh_keys/root_password"
+	default     = "bury148few951"
 }
 
 #--------------------------------------------------------------
