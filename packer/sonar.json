@@ -59,6 +59,42 @@
 	{
 		"type"                  : "shell",
 		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
+		"inline"                : ["mv /tmp/cpu_utilization.sh /etc/consul.d/cpu_utilization.sh"]
+	},
+
+	{
+		"type"                  : "shell",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
+		"inline"                : ["mv /tmp/hdd_utilization.sh /etc/consul.d/hdd_utilization.sh"]
+	},
+
+	{
+		"type"                  : "shell",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
+		"inline"                : ["mv /tmp/memory_utilization.sh /etc/consul.d/memory_utilization.sh"]
+	},
+
+	{
+		"type"  				: "file",
+		"source"				: "consul/common/cpu_utilization.sh",
+		"destination"			: "/tmp/cpu_utilization.sh"
+	},
+
+	{
+		"type"  				: "file",
+		"source"				: "consul/common/hdd_utilization.sh",
+		"destination"			: "/tmp/hdd_utilization.sh"
+	},
+
+	{
+		"type"  				: "file",
+		"source"				: "consul/common/memory_utilization.sh",
+		"destination"			: "/tmp/memory_utilization.sh"
+	},
+
+	{
+		"type"                  : "shell",
+		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
 		"inline"                : ["mv /tmp/clients.json /etc/consul.d/clients.json"]
 	},
 
