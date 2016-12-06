@@ -26,5 +26,28 @@
 				"interval" : "10s"
 			}
 		]
-	}
+	},
+
+	"checks": [
+	    {
+	      "id": "check_cpu_utilization",
+	      "name": "CPU Utilization",
+	      "script": "/etc/consul.d/cpu_utilization.sh",
+	      "interval": "10s"
+	    },
+
+	    {
+	      "id": "check_mem_utilization",
+	      "name": "MEM Utilization",
+	      "script": "/etc/consul.d/mem_utilization.sh",
+	      "interval": "10s"
+	    },
+
+	    {
+	      "id": "check_hdd_utilization",
+	      "name": "HDD Utilization",
+	      "script": "/etc/consul.d/hdd_utilization.sh",
+	      "interval": "10s"
+	    }   
+	]
 }
