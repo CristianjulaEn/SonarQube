@@ -14,7 +14,7 @@ variable "aws_secret_key" {
 }
 
 #--------------------------------------------------------------
-# Key File
+# Key Files
 #--------------------------------------------------------------
 variable "key_file" {
 	type        = "string"
@@ -23,12 +23,12 @@ variable "key_file" {
 }
 
 #--------------------------------------------------------------
-# Password
+# Key File
 #--------------------------------------------------------------
-variable "root_password" {
+variable "private_key_file" {
 	type        = "string"
-	description = "ssh password"
-	default     = "bury148few951"
+	description = "key file"
+	default     = "ssh_keys/Sonarkey.pem"
 }
 
 #--------------------------------------------------------------
