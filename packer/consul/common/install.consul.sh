@@ -22,7 +22,7 @@ sudo chmod 777 /usr/bin/consul
 
 # Create config directory
 sudo mkdir /etc/consul.d
-sudo chmod 777 /etc/consul.d
+sudo chmod -R 777 /etc/consul.d
 
 # Create consul data directory
 sudo mkdir /var/log/consul

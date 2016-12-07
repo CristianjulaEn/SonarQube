@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Modified from https://github.com/andrewpuch/consul_demo/blob/master/scripts/mem_utilization.sh
 
