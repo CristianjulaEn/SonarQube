@@ -72,19 +72,19 @@
 	{
 		"type"                  : "shell",
 		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
-		"inline"                : ["mv /tmp/cpu_utilization.sh /etc/consul.d/cpu_utilization.sh"]
+		"inline"                : ["mv /tmp/cpu_utilization.sh /usr/bin/cpu_utilization.sh"]
 	},
 
 	{
 		"type"                  : "shell",
 		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
-		"inline"                : ["mv /tmp/hdd_utilization.sh /etc/consul.d/hdd_utilization.sh"]
+		"inline"                : ["mv /tmp/hdd_utilization.sh /usr/bin/hdd_utilization.sh"]
 	},
 
 	{
 		"type"                  : "shell",
 		"execute_command"       : "{{ .Vars }} sudo  -E -S bash -c '{{ .Path }}'",
-		"inline"                : ["mv /tmp/memory_utilization.sh /etc/consul.d/memory_utilization.sh"]
+		"inline"                : ["mv /tmp/memory_utilization.sh /usr/bin/memory_utilization.sh"]
 	},
 
 	{
